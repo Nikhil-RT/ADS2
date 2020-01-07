@@ -14,7 +14,7 @@ class Wordnet {
         String i;
         while ((i = br1.readLine()) != null) {
             String s[] = i.split(",");
-            System.out.println(s[1]);
+            System.out.println(s[0]);
         }
         System.out.println("------------------------------------------------------------------------------------------");
         br1.close();
@@ -26,7 +26,7 @@ class Wordnet {
         String j;
         while ((j = br2.readLine()) != null) {
             String h[] = j.split(",");
-            System.out.println(h[1]);
+            System.out.println(h[0]);
         }
         br2.close();
     }
