@@ -4,15 +4,16 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-// import java.util.*;
+import java.util.*;
 class Wordnet {
     HashMap<Integer, List<String>> synsets;
     HashMap<Integer, List<Integer>> hypernyms;
-    Digraph graph;
+    // Digraph graph;
+
     public Wordnet(String Synsets, String Hypernyms) throws IOException {
         ParseSynsets(Synsets);
         ParseHypernyms(Hypernyms);
-        graph = new Digraph();
+        // graph = new Digraph();
     }
     private HashMap<Integer, List<String>> ParseSynsets(String Synsets) throws IOException {
         FileReader fr1 = new FileReader("C:\\Users\\Nikhil\\Desktop\\Msit\\ADS2\\Project - 1\\synsets.txt");
@@ -31,7 +32,7 @@ class Wordnet {
         // System.out.println("------------------------------------------------------------------------------------------");
         br1.close();
         for(int k : synsets.keySet())
-        System.out.println(k +" "+ synsets.get(k).toString());
+        System.out.println(k + " " + synsets.get(k).toString());
         return synsets;
     }
 
@@ -59,5 +60,4 @@ class Wordnet {
         Wordnet obj = new Wordnet("Synsets","Hypernyms");
         
     }
-
 }
