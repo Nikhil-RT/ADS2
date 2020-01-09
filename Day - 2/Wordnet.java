@@ -1,27 +1,21 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.*;
+import edu.princeton.cs.algs4.Digraph;
 class Wordnet {
-    HashMap<Integer, List<String>> synsets;
-    HashMap<Integer, List<Integer>> hypernyms;
+    HashMap<Integer, ArrayList<String>> synsets;
+    HashMap<Integer, ArrayList<Integer>> hypernyms;
+    int v = 0;
     Digraph graph;
-
-    public Wordnet(String Synsets, String Hypernyms) throws IOException {
-        ParseSynsets(Synsets);
-        ParseHypernyms(Hypernyms);
-        graph = new Digraph(82192);
-    }
-    private HashMap<Integer, List<String>> ParseSynsets(String Synsets) throws IOException {
-        FileReader fr1 = new FileReader("C:\\Users\\Nikhil\\Desktop\\Msit\\ADS2\\Project - 1\\synsets.txt");
+    private HashMap<Integer, ArrayList<String>> ParseSynsets(String filename) throws IOException {
+        FileReader fr1 = new FileReader("C:\\Users\\Nikhil\\Desktop\\Msit\\ADS2\\Project - 1\\"+ filename + ".txt");
         synsets = new HashMap<>(); 
         BufferedReader br1 = new BufferedReader(fr1);
         String i;
         while ((i = br1.readLine()) != null) {
-            List<String> temp = new ArrayList<String>();
+            v++;
+            ArrayList<String> temp = new ArrayList<String>();
             String s[] = i.split(",");
             // System.out.println(s[0]);
             for(int j = 1; j < s.length; j++) {
@@ -31,33 +25,55 @@ class Wordnet {
         }
         // System.out.println("------------------------------------------------------------------------------------------");
         br1.close();
-        for(int k : synsets.keySet())
-        System.out.println(k + " " + synsets.get(k).toString());
+        System.out.println("Count of V: "+v);
+        for(int k : synsets.keySet()) {
+        // System.out.println(k + " " + synsets.get(k).toString());
+        }
         return synsets;
     }
 
-    private HashMap<Integer, List<Integer>> ParseHypernyms(String Hypernyms) throws IOException {
-        FileReader fr2 = new FileReader("C:\\Users\\Nikhil\\Desktop\\Msit\\ADS2\\Project - 1\\hypernyms.txt");
+    private HashMap<Integer, ArrayList<Integer>> ParseHypernyms(String filename) throws IOException {
+        // Digraph graph;
+        int count = 0;
+        ArrayList al;
+        FileReader fr2 = new FileReader("C:\\Users\\Nikhil\\Desktop\\Msit\\ADS2\\Project - 1\\"+ filename + ".txt");
         hypernyms = new HashMap<>();
         BufferedReader br2 = new BufferedReader(fr2);
         String j;
         while ((j = br2.readLine()) != null) {
-            List<Integer> temp = new ArrayList<Integer>();
-            String h[] = j.split(",");
-            // System.out.println(h[0]);
-            for(int i = 1; i < h.length; i++) {
-                temp.add(Integer.parseInt(h[i]));
-                hypernyms.put(Integer.parseInt(h[0]), temp);
+            
+            String h[] = j.split(",",2);
+            if (h.length != 1) {
+                String[] temp = h[1].split(",");
+                for( String i : temp) {
+                    if (hypernyms.containsKey(Integer.parseInt(h[0]))) {
+                        al = hypernyms.get(Integer.parseInt(h[0]));
+                    } else {
+                        al = new ArrayList<>();
+                        hypernyms.put(Integer.parseInt(i), al);
+                    }
+                    al.add(Integer.parseInt(i));
+                    count++;
+                    graph.addEdge(Integer.parseInt(h[0]), Integer.parseInt(i));
+                } 
             }
-        }
+
+            // if (count == 10) break;
+        }  
         br2.close();
-        for(int k : hypernyms.keySet()) 
+        
+        System.out.println("Count : "+count);
+        for(int k : hypernyms.keySet()) {
             System.out.println(k + "  " + hypernyms.get(k).toString());
+        }
         return hypernyms;
     }
 
     public static void main(String[] args) throws IOException {
-        Wordnet obj = new Wordnet("Synsets","Hypernyms");
-        
-    }
+        // Wordnet obj = new Wordnet("Synsets","Hypernyms");
+        Wordnet w = new Wordnet();
+        w.ParseSynsets(args[0]);
+        w.graph = new Digraph(w.v);
+        w.ParseHypernyms(args[1]);
+        }
 }

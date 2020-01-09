@@ -34,7 +34,7 @@ class Wordnet {
         br1.close();
         System.out.println(v);
         for(int k : synsets.keySet()){
-        // System.out.println(k +" "+ synsets.get(k).toString());
+        System.out.println(k +" "+ synsets.get(k).toString());
         }
         return synsets;
         
@@ -59,7 +59,7 @@ class Wordnet {
         br2.close();
         System.out.println(count);
         for(int k : hypernyms.keySet()) {
-            // System.out.println(k + "  " + hypernyms.get(k).toString());
+            System.out.println(k + "  " + hypernyms.get(k).toString());
         }
         return hypernyms;
         
