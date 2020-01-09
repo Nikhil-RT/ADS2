@@ -8,12 +8,14 @@ import java.util.List;
 class Wordnet {
     HashMap<Integer, List<String>> synsets;
     HashMap<Integer, List<Integer>> hypernyms;
+    Digraph graph;
     public Wordnet(String Synsets, String Hypernyms) throws IOException {
-        // ParseSynsets(Synsets);
+        ParseSynsets(Synsets);
         ParseHypernyms(Hypernyms);
+        graph = new Digraph();
     }
     private HashMap<Integer, List<String>> ParseSynsets(String Synsets) throws IOException {
-        FileReader fr1 = new FileReader("C:\\Users\\Nikhil\\Desktop\\Msit\\ADS2\\Day - 1\\wordnet\\synsets.txt");
+        FileReader fr1 = new FileReader("C:\\Users\\Nikhil\\Desktop\\Msit\\ADS2\\Project - 1\\synsets.txt");
         synsets = new HashMap<>(); 
         BufferedReader br1 = new BufferedReader(fr1);
         String i;
@@ -24,9 +26,10 @@ class Wordnet {
             for(int j = 1; j < s.length; j++) {
                 temp.add(s[j]);
                 synsets.put(Integer.parseInt(s[0]), temp);
+                // graph.addEdge(Integer.parseInt(s[0]),);
             }    
         }
-        System.out.println("------------------------------------------------------------------------------------------");
+        // System.out.println("------------------------------------------------------------------------------------------");
         br1.close();
         for(int k : synsets.keySet())
         System.out.println(k);
@@ -34,7 +37,7 @@ class Wordnet {
     }
 
     private HashMap<Integer, List<Integer>> ParseHypernyms(String Hypernyms) throws IOException {
-        FileReader fr2 = new FileReader("C:\\Users\\Nikhil\\Desktop\\Msit\\ADS2\\Day - 1\\wordnet\\hypernyms.txt");
+        FileReader fr2 = new FileReader("C:\\Users\\Nikhil\\Desktop\\Msit\\ADS2\\Project - 1\\hypernyms.txt");
         hypernyms = new HashMap<>();
         BufferedReader br2 = new BufferedReader(fr2);
         String j;
@@ -55,5 +58,7 @@ class Wordnet {
 
     public static void main(String[] args) throws IOException {
         Wordnet obj = new Wordnet("Synsets","Hypernyms");
+        
     }
+
 }

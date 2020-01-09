@@ -10,6 +10,24 @@ public class Digraph {
             throw new IllegalArgumentException("vertex " + v + " is not between 0 and " + (V-1));
     }
 
+    public int V() {
+        return V;
+    }
+
+    public int E() {
+        return E;
+    }
+
+    public int outdegree(int v) {
+        validateVertex(v);
+        return adj[v].size();
+    }
+
+    public int indegree(int v) {
+        validateVertex(v);
+        return indegree(v);
+    }
+
     public void addEdge(int v, int w) {
         validateVertex(v);
         validateVertex(w);
@@ -23,7 +41,7 @@ public class Digraph {
         return adj[v];
     }
 
-    public static void main(String[] args) {
-        Digraph graph = new Digraph();
-    }
+    // public static void main(String[] args) {
+    //     Digraph graph = new Digraph();
+    // }
 }
