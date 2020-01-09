@@ -2,7 +2,6 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 class Wordnet {
-    
     public Wordnet(String Synsets, String Hypernyms) throws IOException {
         ParseSynsets(Synsets);
         ParseHypernyms(Hypernyms);
@@ -25,6 +24,7 @@ class Wordnet {
         BufferedReader br2 = new BufferedReader(fr2);
         String j;
         while ((j = br2.readLine()) != null) {
+
             String h[] = j.split(",");
             System.out.println(h[0]);
         }

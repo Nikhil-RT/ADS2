@@ -8,12 +8,12 @@ import java.util.*;
 class Wordnet {
     HashMap<Integer, List<String>> synsets;
     HashMap<Integer, List<Integer>> hypernyms;
-    // Digraph graph;
+    Digraph graph;
 
     public Wordnet(String Synsets, String Hypernyms) throws IOException {
         ParseSynsets(Synsets);
         ParseHypernyms(Hypernyms);
-        // graph = new Digraph();
+        graph = new Digraph(82192);
     }
     private HashMap<Integer, List<String>> ParseSynsets(String Synsets) throws IOException {
         FileReader fr1 = new FileReader("C:\\Users\\Nikhil\\Desktop\\Msit\\ADS2\\Project - 1\\synsets.txt");

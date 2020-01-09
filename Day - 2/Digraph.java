@@ -21,7 +21,7 @@ public class Digraph {
             adj[v] = new Bag<Integer>();
         }
     }
-
+    
     public int V() {
         return V;
     }
