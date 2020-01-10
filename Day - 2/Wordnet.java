@@ -50,7 +50,7 @@ class Wordnet {
                         al = hypernyms.get(Integer.parseInt(h[0]));
                     } else {
                         al = new ArrayList<>();
-                        hypernyms.put(Integer.parseInt(i), al);
+                        hypernyms.put(Integer.parseInt(h[0]), al);
                     }
                     al.add(Integer.parseInt(i));
                     count++;
@@ -63,9 +63,7 @@ class Wordnet {
         br2.close();
         
         System.out.println("Count : "+count);
-        for(int k : hypernyms.keySet()) {
-            System.out.println(k + "  " + hypernyms.get(k).toString());
-        }
+        // System.out.println(hypernyms);
         return hypernyms;
     }
 
